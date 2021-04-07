@@ -30,4 +30,23 @@ The *Internet Protocol* makes no guarantee that packets will always arrive in th
 
 ### What do these Internet Addresses look like?
 
-These are called *IP Addresses* and there are two standards. The first address standard is *IPv4*. The format of *IPv4* is: 212.78.12.10. But because *IPv4* supports only 2³² possible address, so that the *Internet Task Force* proposed for a new address standard *IPv6*, which format is: 3ffe:1893:3452:4:345:f345:f345:42fc. *IPv6* supports 2¹²⁸ possible address. 
+These are called *IP Addresses* and there are two standards. The first address standard is *IPv4*. The format of *IPv4* is: 212.78.12.10. But because *IPv4* supports only 2³² possible address, so that the *Internet Task Force* proposed for a new address standard *IPv6*, which format is: 3ffe:1893:3452:4:345:f345:f345:42fc. *IPv6* supports 2¹²⁸ possible address.
+
+### How can there be over 8 billion networked devices on the Internet if there are only about 4 billion IPv4 addresses?
+
+It's because there are public and private Ip addresses. Multiple devices on a local network connected to the Internet will share the same public IP address. Within the local network, these devices are differentiated from each other by private IP addresses, typically of the form 192.168.xx or 172.16.x.x or 10.x.x.x where x is a number between 1 and 255. These private IP addresses are assigned by Dynamic Host Configuration Protocol (DHCP).
+
+### How does the router know where to send a packet?
+
+Every router doesn't need to know where every  *IP Address* is. Is only need to know which oneof its neighbors, called an outbound link, to route each  packet to. *IP Addresses* can be broken down in two parts, a network prefix and a host idetifier. For example: The *IP Address* 192.32.45.01 can be broken into:
+- Network Prefix: 192.32
+- Host dentifier: 45.01
+
+All network devices connect to the internet through a single connection will all share the same Network Prefix. Routers will send all packets f the form 192.32.*.*. to the same location. So instead of keeping track of billions of *IP Addresses*, routers only need to keep track millions of Network prefixes.
+
+### But a router still need to know a lot of Network Prefixes? If a new router is added to the Internet how does it know how to handle packet for all these network prefixes?
+
+A new router may come with a preconfigured routes. But if it encounters a packet it does not know how to route, it queries one of its neighboring router. If the router know how  to route the packet, that it sends that info back to the requesting router. The requesting router will save this info for future use.In this way, a new router builds up his own route table, a database of network prefixes to outbound links. If the neighboring router doesn't know it queries to its neighbors and so on.
+
+
+###
