@@ -48,5 +48,25 @@ All network devices connect to the internet through a single connection will all
 
 A new router may come with a preconfigured routes. But if it encounters a packet it does not know how to route, it queries one of its neighboring router. If the router know how  to route the packet, that it sends that info back to the requesting router. The requesting router will save this info for future use.In this way, a new router builds up his own route table, a database of network prefixes to outbound links. If the neighboring router doesn't know it queries to its neighbors and so on.
 
+### How do networked computers figure out ip addresses based on domain names?
 
-###
+We call looking up the *IP Address* of a human-readable domain name like [www.google.com](http://google.com) "resolving the IP address". Computer resolves IP Addresses through the *Domain Name System*. To resolve an IP address, the computer first checks its local DNS cache, which stores the *IP Address* of websites it has visited recently. If it can't find the *YP address* there or that *IP address* record has expired, it queries the ISP's DNS servers which are dedicated to resolving IP address. If ISP's DNS serves can't find the IP address, they query the **root name servers**, which can resolve evrey domain name for a given top-level domain. *.com*, *.net*, *.org* are some examples of top-level domains.
+
+### How do applications communicate over the internet?
+
+Like many other complex engineering projects, the internet is broken down into smaller independent componenets, which work together through well-defined interfaces. These components are called the internet network layers and they consist of *Link Layer*, *Internet Layer*, *Transport Layer* and *Application Layer*. They are called layers because they are built on top of each other; each layer uses the capabilities of the layers beneath it without worrying about its implementation details.
+
+                          |    Layers   |
+                          |-------------|
+                          | Application |     Layer 4
+                          |  Transport  |     Layer 3
+                          |   Internet  |     Layer 2
+                          |     Link    |     Layer 1
+
+### What do each of these layers do?
+
+At the lowest level is the *Link Layer* which is the "Physical Layer" of the internet. The *link layer* concerned with transmitting data bits through some physical medium like fiber-optic cables or wifi radio signals.
+
+On top of the Link Layer is the *Internet Layer*. The Internet Layer is concerned with routing packets to their destinations. The Internet Protocol mentioned earlier lives in this layer. The Internet Protocol dynamically adjusts and reroutes packets based on network load or outages. Note it does not guarantee packets always make it to their destination, it just tries the best it can.
+
+On top of the Internet Layer is the *Transport Layer*. This layer is to compensate for the fact that data can be loss in the Internet and Link layers below. The Transport Control Protocol mentioned earlier lives at this layer, and it works primarily to re-assembly packets into their original messages and also re-transmit packets that were loss. The Application Layer sits on top. This layer uses all the layers below to handle the complex details of moving the packets across the Internet. It lets applications easily make connections with other applications on the Internet with simple abstractions like sockets. The HTTP protocol which specifies how web browsers and web servers should interact lives in the Application Layer. The IMAP protocol which specifies how email clients should retrieve email lives in the Application Layer. The FTP protocol which specifies a file-transferring protocol between file-downloading clients and file-hosting servers lives in the Application Layer.
