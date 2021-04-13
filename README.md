@@ -69,4 +69,24 @@ At the lowest level is the *Link Layer* which is the "Physical Layer" of the int
 
 On top of the Link Layer is the *Internet Layer*. The Internet Layer is concerned with routing packets to their destinations. The Internet Protocol mentioned earlier lives in this layer. The Internet Protocol dynamically adjusts and reroutes packets based on network load or outages. Note it does not guarantee packets always make it to their destination, it just tries the best it can.
 
-On top of the Internet Layer is the *Transport Layer*. This layer is to compensate for the fact that data can be loss in the Internet and Link layers below. The Transport Control Protocol mentioned earlier lives at this layer, and it works primarily to re-assembly packets into their original messages and also re-transmit packets that were loss. The Application Layer sits on top. This layer uses all the layers below to handle the complex details of moving the packets across the Internet. It lets applications easily make connections with other applications on the Internet with simple abstractions like sockets. The HTTP protocol which specifies how web browsers and web servers should interact lives in the Application Layer. The IMAP protocol which specifies how email clients should retrieve email lives in the Application Layer. The FTP protocol which specifies a file-transferring protocol between file-downloading clients and file-hosting servers lives in the Application Layer.
+On top of the Internet Layer is the *Transport Layer*. This layer is to compensate for the fact that data can be loss in the Internet and Link layers below. The Transport Control Protocol mentioned earlier lives at this layer, and it works primarily to re-assembly packets into their original messages and also re-transmit packets that were loss. The Application Layer sits on top. This layer uses all the layers below to handle the complex details of moving the packets across the Internet. It lets applications easily make connections with other applications on the Internet with simple abstractions like sockets. The HTTP protocol which specifies how web browsers and web servers should interact lives in the Application Layer. The IMAP protocol which specifies ho w email clients should retrieve email lives in the Application Layer. The FTP protocol which specifies a file-transferring protocol between file-downloading clients and file-hosting servers lives in the Application Layer.
+
+### What’s a client versus a server?
+
+While clients and servers are both applications that communicate over the Internet, clients are “closer to the user” in that they are more user-facing applications like web browsers, email clients, or smart phone apps. Servers are application running on remote computer which the client communicates over the internet when it needs to. A more formal defnition is that, the application that initiates the TCP connection is client, while the application recieves the TCP connection is server.
+
+### How can sensitive data like credit cards be transmitted securely over the Internet?
+
+In the early days of the Internet, it was enough to ensure that the network routers and links are in physically secure locations. But as the Internet grew in size, more routers meant more points of vulnerability. Furthermore, with the advent of wireless technologies like WiFi, hackers could intercept packets in the air; it was not enough to just ensure the network hardware was physically safe. The solution to this was encryption and authentication through SSL/TLS.
+
+### What is SSL/TLS?
+
+SSL stands for Secured Sockets Layer. TLS stands for Transport Layer Security.
+
+SSL/TLS is an optional layer that sits between the Transport Layer and the Application Layer. It allows secure Internet communication of sensitive information through encryption and authentication. Encryption means the client can request that the TCP connection to the server be encrypted. This means all messages sent between client and server will be encrypted before breaking it into packets. If hackers intercept these packets, they would not be able to reconstruct the original message.
+
+Authentication means the client can trust that the server is who it claims to be. This protects against man-in-the-middle attacks, which is when a malicious party intercepts the connection between client and server to eavesdrop and tamper with their communication.
+
+We see SSL in action whenever we visit SSL-enabled websites on modern browsers. When the browser requests a web site using the https protocol instead of http, it’s telling the web server it wants an SSL encrypted connection. If the web server supports SSL, a secure encrypted connection is made and we would see a lock icon next to the address bar on the browser.
+
+### 
